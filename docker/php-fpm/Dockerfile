@@ -4,8 +4,11 @@ FROM php:7.3.17-fpm-alpine3.11
 ## composerは別コンテナにしてもいいかも
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-## apline3.3以降であればapk addに--no-cacheを使うことでrm -rf /var/cache/apk/*は不要
+## alpine3.3以降であればapk addに--no-cacheを使うことでrm -rf /var/cache/apk/*は不要
+## タイムゾーンをAsia/Tokyoに変更(https://wiki.alpinelinux.org/wiki/Setting_the_timezone)
 RUN set -eux \
+  && apk update \
+  && apk add --no-cache tzdata && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && echo "Asia/Tokyo" > /etc/timezone && apk del tzdata \
   && docker-php-ext-install -j$(nproc) pdo_mysql \
   && rm -rf /var/cache/apk/*
 
