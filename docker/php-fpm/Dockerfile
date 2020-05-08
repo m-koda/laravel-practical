@@ -8,8 +8,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 ## タイムゾーンをAsia/Tokyoに変更(https://wiki.alpinelinux.org/wiki/Setting_the_timezone)
 RUN set -eux \
   && apk update \
+  && apk add --no-cache g++ autoconf make gcc \
   && apk add --no-cache tzdata && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && echo "Asia/Tokyo" > /etc/timezone && apk del tzdata \
-  && docker-php-ext-install -j$(nproc) pdo_mysql \
+  && docker-php-ext-install -j$(nproc) pdo_mysql bcmath mbstring \
   && rm -rf /var/cache/apk/*
 
 RUN mkdir /var/www/src
