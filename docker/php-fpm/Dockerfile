@@ -5,4 +5,3 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN mkdir /var/www/src
 WORKDIR /var/www/src
-#COPY ./src /var/www/html

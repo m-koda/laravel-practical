@@ -5,8 +5,8 @@ services:
     ports:
       - "80:80"
     volumes: 
-      - ./src:/var/www/src
-      - ./docker/nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf
+      - ./src/public:/var/www/src/public
+      - ./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/defalut.conf
 
   php-fpm:
     build: ./docker/php-fpm
