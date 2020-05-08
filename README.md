@@ -5,3 +5,4 @@
 - Laravel: 5.8.38
 - PHP: 7.3.17
 - Nginx: 1.18.0
+- MySQL: 5.7.30
